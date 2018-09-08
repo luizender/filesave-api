@@ -1,6 +1,10 @@
+sudo: required
 language: python
 python:
     - "3.6"
+
+services:
+    - docker
 
 env:
     - GOOGLE_APPLICATION_CREDENTIALS=gce.json
@@ -19,9 +23,12 @@ jobs:
         - stage: tests
           script: make lint
         - stage: tests
+          env:
+            - GOOGLE_APPLICATION_CREDENTIALS=gce.json
           script: make tests
         - stage: deploy
           provider: gae
           project: filesave-215811
           keyfile: gce.json
           verbosity: debug
+          on: master
