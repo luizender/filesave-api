@@ -2,4 +2,4 @@
 .vscode
 docs/build
 docs/source/_*
-store-credential.json
+gce.json

@@ -1,7 +1,23 @@
+sudo: required
+
+services:
+  - docker
+
 language: python
 python:
     - "3.6"
-install:
-    - pip install -r requirements.txt
-script:
-    - make lint
+
+jobs:
+    include:
+        - stage: test
+            install:
+                - pip install -r requirements.txt
+            script:
+                - make lint
+                - make tests
+        - stage: deploy
+            provider: gae
+            project: filesave-215811
+            keyfile: gce.json
+            verbosity: debug
+            on: master
