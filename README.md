@@ -12,7 +12,11 @@ This project is an API to save file on Google Store for the technical test of MO
 * [Code Documentation](#code-documentation)
 * [Code Analysis](#code-analysis)
 * [Execute Unit Test](#execute-unit-test)
-* [Access the API](#access-the-api)
+* [Accessing API URLs](#accessing-api-urls)
+    * [Upload file](#upload-file)
+    * [Get the list of files](#get-the-list-of-files)
+    * [Get specific file](#get-specific-file)
+    * [Delete file](#delete-file)
 
 ## Requirements
 
@@ -86,12 +90,38 @@ If you want to execute the unittest, you need to execute the following command a
 make tests
 ```
 
-## Access the API
+## Accessing API URLs
 
-You can access the API using the follow step:
+To access the URLs of API, you can use the command line [curl](https://curl.haxx.se/) or the [Postman](https://www.getpostman.com/)
+
+### Upload file
+
+To upload a file to the Storage, you need to execute:
+```
+touch test.txt
+curl -X POST -F 'file=@./test.txt' http://127.0.0.1:5000/file
+```
+
+### Get the list of files
+
+To get the list of file, you need to execute the following command:
 
 ```
 curl -X GET http://127.0.0.1:5000/file
 ```
 
-Or, you can access using your browser with the address ```http://127.0.0.1:5000/file```
+### Get specific file
+
+To get the the specific file, you need to execute the following command:
+
+```
+curl -X GET http://127.0.0.1:5000/file/test.txt
+```
+
+### Delete file
+
+To delete the file you need to execute:
+
+```
+curl -X DELETE http://127.0.0.1:5000/file/test.txt
+```
