@@ -1,20 +1,26 @@
-sudo: required
+sudo: enabled
 
 services:
   - docker
+
+env:
+    - GOOGLE_APPLICATION_CREDENTIALS=gce.json
 
 language: python
 python:
     - "3.6"
 
+before_install:
+    - openssl aes-256-cbc -K $encrypted_fe78e4c36734_key -iv $encrypted_fe78e4c36734_iv -in gce.json.enc -out gce.json -d
+install:
+    - pip install -r requirements.txt
+
 jobs:
     include:
-        - stage: test
-            install:
-                - pip install -r requirements.txt
-            script:
-                - make lint
-                - make tests
+        - stage: lint
+            script: make lint
+        - stage: tests
+            script: make tests
         - stage: deploy
             provider: gae
             project: filesave-215811
