@@ -4,4 +4,5 @@ RUN apk add --no-cache --update python3 python3-dev make gcc musl-dev
 WORKDIR /code
 COPY . /code/
 RUN pip3 install -r requirements.txt --no-cache-dir
+ENV GOOGLE_APPLICATION_CREDENTIALS=/code/gcloud-storage-credential.json
 CMD [ "make", "run" ]
