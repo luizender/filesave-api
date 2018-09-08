@@ -5,7 +5,7 @@ This module has the class of Google Cloud Storage
 from google.cloud import storage, exceptions
 from api.settings import (GCLOUD_PROJECT, GCLOUD_STORAGE_BUCKET,
                           GCLOUD_STORAGE_ROOT_PATH, GCLOUD_STORAGE_CHUNK_SIZE)
-from .storage import Storage
+from api.resources.storage import Storage
 
 
 class GCloudStorage(Storage):
@@ -28,10 +28,19 @@ class GCloudStorage(Storage):
 
         :param file: The file to upload
         :type file: file
+        :raises AttributeError: If file is None
+        :return: Return True if success
+        :rtype: bool
         """
+
+        if not file:
+            raise AttributeError('Invalid file')
+
         filename = '%s/%s' % (GCLOUD_STORAGE_ROOT_PATH, file.filename)
         blob = self.bucket.blob(filename, chunk_size=GCLOUD_STORAGE_CHUNK_SIZE)
         blob.upload_from_string(file.read(), content_type=file.content_type)
+
+        return True
 
     def get(self, filename=None):
         """
@@ -40,6 +49,7 @@ class GCloudStorage(Storage):
 
         :param filename: The name of file to get
         :type filename: str
+        :raises FileNotFoundError: If file not found
         :return: The list of files or the specific file
         """
         if not filename:
@@ -59,7 +69,7 @@ class GCloudStorage(Storage):
             raise FileNotFoundError()
 
         return {
-            'filename': blob.name,
+            'filename': blob.name[len(GCLOUD_STORAGE_ROOT_PATH):],
             'content_type': blob.content_type,
             'size': blob.size,
         }
@@ -70,9 +80,14 @@ class GCloudStorage(Storage):
 
         :param filename: The name of file to delete
         :type filename: str
+        :raises FileNotFoundError: If file not found
         """
         filename = '%s/%s' % (GCLOUD_STORAGE_ROOT_PATH, filename)
         try:
             self.bucket.delete_blob(filename)
+
+            return True
         except exceptions.NotFound:
             raise FileNotFoundError()
+
+        return False
