@@ -44,6 +44,8 @@ After setup the container, you can run the services with the following command:
 docker-compose up
 ```
 
+But, you need to get the credential file of Storage and save as ```store-credential.json```. See the documentation of Authentication for more details ([Link of documentation](https://cloud.google.com/docs/authentication/getting-started))
+
 ## Running with Shell
 
 To run with shell, you need to execute
@@ -89,7 +91,7 @@ make tests
 You can access the API using the follow step:
 
 ```
-curl -X GET http://127.0.0.1:8000/
+curl -X GET http://127.0.0.1:5000/file
 ```
 
-Or, you can access using your browser with the address ```http://127.0.0.1:8000/```
+Or, you can access using your browser with the address ```http://127.0.0.1:5000/file```

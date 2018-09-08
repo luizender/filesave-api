@@ -10,9 +10,11 @@ from api.resources import File
 from api.resources.storage import GCloudStorage
 from api.settings import LOGGING_FILE
 
+# Create the API app
 APP = Flask(__name__)
 API = Api(APP)
 
+# URLs of API
 API.add_resource(File, '/file', '/file/<string:filename>',
                  resource_class_kwargs={'storage': GCloudStorage()})
 

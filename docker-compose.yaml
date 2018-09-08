@@ -9,4 +9,5 @@ services:
         working_dir: /code
         environment: 
             API_MODE: devel
+            GOOGLE_APPLICATION_CREDENTIALS: store-credential.json
         command: [ "make", "run" ]
