@@ -3,25 +3,23 @@ python:
     - "3.6"
 before_install:
     - openssl aes-256-cbc -K $encrypted_fe78e4c36734_key -iv $encrypted_fe78e4c36734_iv -in gce.json.enc -out gce.json -d
-install:
-    - pip install -r requirements.txt
 stages:
   - name: tests
-  - name: deploy
 jobs:
     include:
         - stage: tests
+          install: pip install -r requirements.txt
           script: make lint
         - stage: tests
+          install: pip install -r requirements.txt
           env:
             - GOOGLE_APPLICATION_CREDENTIALS=gce.json
           script: make tests
-        - stage: deploy
-          provider: gae
-          skip_cleanup: true
-          keyfile: gce.json
-          config: src/app.yaml
-          project: filesave-215811
-          default: true
-          on:
-            all_branches: true
+deploy:
+    provider: gae
+    skip_cleanup: true
+    keyfile: gce.json
+    config: src/app.yaml
+    project: filesave-215811
+    default: true
+    on: master
