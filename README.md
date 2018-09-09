@@ -1,5 +1,7 @@
 # API Rest Project for save file on Google Store
 
+[![Build Status](https://travis-ci.org/luizender/filesave-api.svg?branch=master)](https://travis-ci.org/luizender/filesave-api)
+
 This project is an API to save file on Google Store for the technical test of MOVTI
 
 ## Table of Contents
