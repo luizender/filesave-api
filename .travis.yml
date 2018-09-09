@@ -5,6 +5,7 @@ before_install:
     - openssl aes-256-cbc -K $encrypted_fe78e4c36734_key -iv $encrypted_fe78e4c36734_iv -in gce.json.enc -out gce.json -d
 stages:
   - name: tests
+  - name: deploy
 jobs:
     include:
         - stage: tests
@@ -15,11 +16,13 @@ jobs:
           env:
             - GOOGLE_APPLICATION_CREDENTIALS=gce.json
           script: make tests
-deploy:
-    provider: gae
-    skip_cleanup: true
-    keyfile: gce.json
-    config: src/app.yaml
-    project: filesave-215811
-    default: true
-    on: master
+        - stage: deploy
+          script: skip
+          deploy:
+            provider: gae
+            skip_cleanup: true
+            keyfile: gce.json
+            config: src/app.yaml
+            project: filesave-215811
+            default: true
+            on: master
