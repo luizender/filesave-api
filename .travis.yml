@@ -27,5 +27,5 @@ jobs:
           provider: gae
           project: filesave-215811
           keyfile: gce.json
-          config: ./src
+          config: src/app.yaml
           on: master
