@@ -19,8 +19,10 @@ jobs:
           script: make tests
         - stage: deploy
           provider: gae
-          project: filesave-215811
+          skip_cleanup: true
           keyfile: gce.json
           config: src/app.yaml
-          on: master
-          script: echo "No Script to run"
+          project: filesave-215811
+          default: true
+          on:
+            all_branches: true
