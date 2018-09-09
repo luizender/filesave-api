@@ -7,3 +7,6 @@ runtime_config:
 
 env_variables:
   API_MODE: "prod"
+
+skip_files:
+  - tests/
