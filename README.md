@@ -50,7 +50,7 @@ After setup the container, you can run the services with the following command:
 docker-compose up
 ```
 
-But, you need to get the credential file of Storage and save as ```store-credential.json```. See the documentation of Authentication for more details ([Link of documentation](https://cloud.google.com/docs/authentication/getting-started))
+But, you need to get the credential file of Storage and save as ```service-account.json```. See the documentation of Authentication for more details ([Link of documentation](https://cloud.google.com/docs/authentication/getting-started))
 
 ## Running with Shell
 

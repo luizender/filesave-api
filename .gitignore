@@ -2,4 +2,4 @@
 .vscode
 docs/build
 docs/source/_*
-gce.json
+service-account.json

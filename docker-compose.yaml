@@ -9,5 +9,5 @@ services:
         working_dir: /code
         environment: 
             API_MODE: devel
-            GOOGLE_APPLICATION_CREDENTIALS: gce.json
+            GOOGLE_APPLICATION_CREDENTIALS: service-account.json
         command: [ "make", "run" ]
