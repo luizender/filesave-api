@@ -20,6 +20,7 @@ jobs:
             - GOOGLE_APPLICATION_CREDENTIALS=gce.json
           script: make tests
         - stage: deploy
+          script: echo "No Script to run"
           provider: gae
           project: filesave-215811
           keyfile: gce.json
