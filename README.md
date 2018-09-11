@@ -8,6 +8,7 @@ This project is an API to save file on Google Store for the technical test of MO
 
 * [Requirements](#requirements)
 * [Environment Variables](#environment-variables)
+* [Build your Storage on Google](#build-your-storage-on-google)
 * [Setup](#setup)
 * [Running](#running)
 * [Running with Shell](#running-with-shell)
@@ -33,6 +34,10 @@ The Environment Variables of this container are:
 * GCLOUD_STORAGE_BUCKET: The name of Google Cloud Storage (Default: filesave-storage)
 * GCLOUD_STORAGE_CHUNK_SIZE: The chunk size must be a multiple of 256KB (Default: 524288)
 
+## Build your Storage on Google
+
+First of all, you need to create your project at Google Cloud ([see the documentation](https://cloud.google.com/resource-manager/docs/creating-managing-projects)). Now, you can create your storage ([see the documentation](https://cloud.google.com/storage/docs/creating-buckets)). After that, you need to get the credential file of Storage and save as ```service-account.json```. See the documentation of Authentication for more details ([Link of documentation](https://cloud.google.com/docs/authentication/getting-started))
+
 ## Setup
 
 To set up the container, you need to execute:
@@ -50,8 +55,6 @@ After setup the container, you can run the services with the following command:
 ```
 docker-compose up
 ```
-
-But, you need to get the credential file of Storage and save as ```service-account.json```. See the documentation of Authentication for more details ([Link of documentation](https://cloud.google.com/docs/authentication/getting-started))
 
 ## Running with Shell
 
