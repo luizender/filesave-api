@@ -9,5 +9,9 @@ services:
         working_dir: /code
         environment: 
             API_MODE: devel
+            STORAGE_ROOT_PATH: /devel
+            GCLOUD_PROJECT: test-filesave
+            GCLOUD_STORAGE_BUCKET: test-filesave-storage
             GOOGLE_APPLICATION_CREDENTIALS: service-account.json
+            GCLOUD_STORAGE_CHUNK_SIZE: 524288
         command: [ "make", "run" ]

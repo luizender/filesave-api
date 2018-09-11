@@ -4,7 +4,7 @@ This module has the class of Google Cloud Storage
 """
 from google.cloud import storage, exceptions
 from api.settings import (GCLOUD_PROJECT, GCLOUD_STORAGE_BUCKET,
-                          GCLOUD_STORAGE_ROOT_PATH, GCLOUD_STORAGE_CHUNK_SIZE)
+                          STORAGE_ROOT_PATH, GCLOUD_STORAGE_CHUNK_SIZE)
 from api.resources.storage import Storage
 
 
@@ -36,7 +36,7 @@ class GCloudStorage(Storage):
         if not file:
             raise AttributeError('Invalid file')
 
-        filename = '%s/%s' % (GCLOUD_STORAGE_ROOT_PATH, file.filename)
+        filename = '%s/%s' % (STORAGE_ROOT_PATH, file.filename)
         blob = self.bucket.blob(filename, chunk_size=GCLOUD_STORAGE_CHUNK_SIZE)
         blob.upload_from_string(file.read(), content_type=file.content_type)
 
@@ -54,22 +54,22 @@ class GCloudStorage(Storage):
         """
         if not filename:
             list_files = []
-            blobs = self.bucket.list_blobs(prefix=GCLOUD_STORAGE_ROOT_PATH)
+            blobs = self.bucket.list_blobs(prefix=STORAGE_ROOT_PATH)
             for blob in blobs:
                 list_files.append({
-                    'filename': blob.name[len(GCLOUD_STORAGE_ROOT_PATH):],
+                    'filename': blob.name[len(STORAGE_ROOT_PATH):],
                     'content_type': blob.content_type,
                     'size': blob.size
                 })
             return list_files
 
-        filename = '%s/%s' % (GCLOUD_STORAGE_ROOT_PATH, filename)
+        filename = '%s/%s' % (STORAGE_ROOT_PATH, filename)
         blob = self.bucket.get_blob(filename)
         if not blob:
             raise FileNotFoundError()
 
         return {
-            'filename': blob.name[len(GCLOUD_STORAGE_ROOT_PATH):],
+            'filename': blob.name[len(STORAGE_ROOT_PATH):],
             'content_type': blob.content_type,
             'size': blob.size,
         }
@@ -82,7 +82,7 @@ class GCloudStorage(Storage):
         :type filename: str
         :raises FileNotFoundError: If file not found
         """
-        filename = '%s/%s' % (GCLOUD_STORAGE_ROOT_PATH, filename)
+        filename = '%s/%s' % (STORAGE_ROOT_PATH, filename)
         try:
             self.bucket.delete_blob(filename)
 

@@ -28,6 +28,7 @@ To run this project, you need to install the [Docker](https://docs.docker.com/in
 
 The Environment Variables of this container are:
 * API_MODE: The mode of API. The mode can be 'prod' or 'devel' (Default: prod)
+* STORAGE_ROOT_PATH: The path to save the files at storage (Default: /)
 * GCLOUD_PROJECT: The name of Google Cloud Project (Default: filesave)
 * GCLOUD_STORAGE_BUCKET: The name of Google Cloud Storage (Default: filesave-storage)
 * GCLOUD_STORAGE_CHUNK_SIZE: The chunk size must be a multiple of 256KB (Default: 524288)

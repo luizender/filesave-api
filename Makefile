@@ -16,7 +16,7 @@ lint:
 	PYTHONPATH=${SRC_DIR} pylint ${SRC_DIR}
 
 tests:
-	PYTHONPATH=${SRC_DIR} API_MODE=test python3 -m unittest discover -s ${TESTS_DIR}
+	PYTHONPATH=${SRC_DIR} STORAGE_ROOT_PATH=/test python3 -m unittest discover -s ${TESTS_DIR}
 
 clean:
 	rm -rf ${DOC_DIR}/build ${DOC_DIR}/source/_*
